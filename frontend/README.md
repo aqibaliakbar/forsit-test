@@ -1,63 +1,62 @@
-# Forsit E-commerce Dashboard - Frontend
+# Forsit E-commerce Frontend
 
-A modern, responsive Vue.js e-commerce application with both customer-facing shopping features and comprehensive admin dashboard for inventory management, analytics, and order processing.
+A modern, responsive Vue.js 3 application for an e-commerce dashboard with comprehensive product management, order tracking, analytics, and a customer-facing landing page.
 
 ## 🚀 Features
 
-### Customer-Facing Features
+### Dashboard Features
 
-- **Landing Page**: Hero section with featured products and shopping experience
-- **Product Catalog**: Interactive product grid with detailed product modals
-- **Shopping Cart**: Full cart functionality with quantity management
-- **Checkout Process**: Complete checkout flow with order summary
-- **Responsive Design**: Mobile-first approach optimized for all devices
+- **Product Management**: Complete CRUD operations for products with image upload
+- **Inventory Management**: Stock tracking, low stock alerts, and filtering
+- **Order Management**: Order processing, status updates, and customer information
+- **Analytics Dashboard**: Revenue charts, sales statistics, and performance metrics
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
 
-### Admin Dashboard Features
+### Customer Features
 
-- **Dashboard Overview**: Real-time metrics, charts, and recent activity monitoring
-- **Revenue Analysis**: Interactive charts with filtering by time periods and categories
-- **Inventory Management**: Advanced product listing with filtering and stock management
-- **Product Management**: Complete product creation/editing with image upload
-- **Order Management**: Order tracking, status updates, and order analytics
-- **Low Stock Alerts**: Automated notifications for inventory management
+- **Landing Page**: Product catalog with search and filtering
+- **Shopping Cart**: Add to cart functionality with quantity management
+- **Product Details**: Modal-based product information and images
+- **Checkout Process**: Complete order form with customer information
 
 ### Technical Features
 
-- **Vue 3 Composition API**: Modern Vue.js with script setup syntax
-- **Pinia State Management**: Centralized state management for products, orders, and cart
-- **Vue Router**: Client-side routing with lazy loading
-- **Chart.js Integration**: Interactive charts for analytics and reporting
-- **Tailwind CSS**: Utility-first CSS framework with custom design system
-- **Component Architecture**: Feature-based component organization for maintainability
-- **Axios**: HTTP client with interceptors and error handling
+- **Modern UI**: Beautiful interface with Tailwind CSS and Heroicons
+- **State Management**: Pinia for efficient state management
+- **Routing**: Vue Router with navigation guards
+- **Charts**: Interactive charts with Chart.js and Vue-ChartJS
+- **API Integration**: Axios-based API communication
+- **Loading States**: Skeleton components for better UX
+- **Toast Notifications**: User feedback system
+- **Error Handling**: Comprehensive error boundaries
 
-## 📦 Tech Stack
+## 🛠️ Tech Stack
 
-- **Framework**: Vue 3 (Composition API)
-- **Build Tool**: Vite
+- **Framework**: Vue.js 3 with Composition API
+- **Build Tool**: Vite for fast development and building
+- **Styling**: Tailwind CSS with custom components
+- **Icons**: Heroicons Vue
 - **State Management**: Pinia
 - **Routing**: Vue Router 4
-- **Styling**: Tailwind CSS
-- **Charts**: Chart.js + Vue-ChartJS
 - **HTTP Client**: Axios
-- **Icons**: Heroicons
-- **Date Utilities**: date-fns
+- **Charts**: Chart.js with Vue-ChartJS
+- **Date Handling**: date-fns
 - **Code Quality**: ESLint + Prettier
+- **Development**: Vite DevTools
 
-## 🛠️ Installation
+## 📋 Prerequisites
 
-### Prerequisites
+- Node.js (version 16.0.0 or higher)
+- npm (version 7.0.0 or higher)
+- Backend API server running (see backend README)
 
-- Node.js 16+
-- npm or yarn
-- Backend API running on port 5000
+## 🔧 Installation
 
-### Setup Steps
-
-1. **Clone and navigate to frontend directory**
+1. **Clone the repository**
 
    ```bash
-   cd frontend
+   git clone https://github.com/aqibaliakbar/forsit-test.git
+   cd forsit-test/frontend
    ```
 
 2. **Install dependencies**
@@ -69,284 +68,326 @@ A modern, responsive Vue.js e-commerce application with both customer-facing sho
 3. **Environment Configuration**
 
    ```bash
-   # Copy environment example
    cp env.example .env
+   ```
 
-   # Edit .env file with your configuration
+   Update the `.env` file with your configuration:
+
+   ```env
+   # API Configuration
    VITE_API_URL=http://localhost:5000/api
    ```
 
-4. **Start development server**
+4. **Start the development server**
 
    ```bash
    npm run dev
    ```
 
-5. **Build for production**
-   ```bash
-   npm run build
-   ```
+   The application will be available at `http://localhost:5173`
+
+## 🚀 Available Scripts
+
+- `npm run dev` - Start development server with hot reloading
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build locally
+- `npm run lint` - Run ESLint with auto-fix
+- `npm run format` - Format code with Prettier
 
 ## 📁 Project Structure
 
 ```
-src/
-├── assets/                    # Static assets and global styles
-│   ├── main.css              # Tailwind imports and custom styles
-│   └── logo.svg              # Application logo
-├── components/               # Reusable Vue components (organized by feature)
-│   ├── checkout/            # Checkout process components
-│   │   ├── CheckoutForm.vue
-│   │   └── OrderSummary.vue
-│   ├── dashboard/           # Dashboard overview components
-│   │   ├── DashboardCharts.vue
-│   │   ├── DashboardRecentActivity.vue
-│   │   └── DashboardStatsCards.vue
-│   ├── inventory/           # Inventory management components
-│   │   ├── InventoryFilters.vue
-│   │   ├── InventoryStatsCards.vue
-│   │   └── ProductsTable.vue
-│   ├── landing-page/        # Public-facing landing page components
-│   │   ├── HeroSection.vue
-│   │   ├── ProductGrid.vue
-│   │   └── ProductDetailsModal.vue
-│   ├── layout/              # Layout and navigation components
-│   │   ├── AppHeader.vue           # Admin dashboard header
-│   │   ├── AppSidebar.vue          # Admin dashboard sidebar
-│   │   ├── DashboardLayout.vue     # Admin layout wrapper
-│   │   ├── NotificationsDropdown.vue
-│   │   ├── PublicFooter.vue        # Public site footer
-│   │   ├── PublicLayout.vue        # Public site layout wrapper
-│   │   ├── PublicNavigation.vue    # Public site navigation
-│   │   └── ShoppingCartSidebar.vue # Shopping cart component
-│   ├── orders/              # Order management components
-│   │   ├── OrderModals.vue
-│   │   ├── OrdersStatsCards.vue
-│   │   └── OrdersTable.vue
-│   ├── products/            # Product management components
-│   │   ├── ProductFormFields.vue
-│   │   └── ProductFormSidebar.vue
-│   ├── revenue/             # Revenue analytics components
-│   │   ├── RevenueChartsAndTable.vue
-│   │   ├── RevenueFilters.vue
-│   │   └── RevenueStatsCards.vue
-│   └── other/               # Utility components
-│       └── Toast.vue        # Toast notification component
-├── composables/             # Vue composables for shared logic
-├── router/                  # Vue Router configuration
-│   └── index.js            # Route definitions
-├── services/               # API services and utilities
-│   └── api.js              # Axios configuration and API endpoints
-├── stores/                 # Pinia stores
-│   ├── products.js         # Product state management
-│   ├── orders.js           # Order state management
-│   └── counter.js          # Example counter store
-├── views/                  # Page components
-│   ├── CheckoutView.vue              # Checkout page
-│   ├── DashboardView.vue             # Main admin dashboard
-│   ├── InventoryManagementView.vue   # Inventory management page
-│   ├── LandingPageView.vue           # Public landing page
-│   ├── NotFoundView.vue              # 404 error page
-│   ├── OrdersView.vue                # Order management page
-│   ├── ProductFormView.vue           # Product creation/editing page
-│   └── RevenueAnalysisView.vue       # Revenue analytics page
-├── App.vue                 # Root component with layout logic
-└── main.js                 # Application entry point
+frontend/
+├── public/
+│   ├── icons/               # App icons and favicons
+│   ├── forsit-logo.svg     # Brand logo
+│   └── site.webmanifest    # PWA manifest
+├── src/
+│   ├── assets/
+│   │   └── main.css        # Global styles and Tailwind imports
+│   ├── components/
+│   │   ├── checkout/       # Checkout process components
+│   │   ├── dashboard/      # Dashboard overview components
+│   │   ├── inventory/      # Product inventory management
+│   │   ├── landing-page/   # Customer-facing components
+│   │   ├── layout/         # Layout and navigation components
+│   │   ├── orders/         # Order management components
+│   │   ├── products/       # Product management components
+│   │   ├── revenue/        # Analytics and revenue components
+│   │   ├── skeleton/       # Loading skeleton components
+│   │   └── other/          # Shared components (Toast, etc.)
+│   ├── composables/
+│   │   └── useToast.js     # Toast notification composable
+│   ├── router/
+│   │   └── index.js        # Vue Router configuration
+│   ├── services/
+│   │   └── api.js          # Axios API service layer
+│   ├── stores/
+│   │   ├── products.js     # Product state management
+│   │   ├── orders.js       # Order state management
+│   │   └── cart.js         # Shopping cart state
+│   ├── views/
+│   │   ├── DashboardView.vue
+│   │   ├── InventoryManagementView.vue
+│   │   ├── OrdersView.vue
+│   │   ├── ProductFormView.vue
+│   │   ├── RevenueAnalysisView.vue
+│   │   ├── LandingPageView.vue
+│   │   └── NotFoundView.vue
+│   ├── App.vue             # Root component
+│   └── main.js             # Application entry point
+├── tailwind.config.js      # Tailwind CSS configuration
+├── vite.config.js          # Vite configuration
+├── package.json
+└── README.md
 ```
 
-## 🎨 Design System
+## 🎨 UI Components
 
-### Color Palette
+### Layout Components
 
-- **Primary**: Blue (#3B82F6)
-- **Success**: Green (#22C55E)
-- **Warning**: Amber (#F59E0B)
-- **Danger**: Red (#EF4444)
-- **Dark Theme**: Slate color palette for modern dark UI
+- **DashboardLayout**: Admin dashboard layout with sidebar navigation
+- **PublicLayout**: Customer-facing layout with header and footer
+- **AppHeader**: Navigation header with user actions
+- **AppSidebar**: Dashboard navigation sidebar
+- **PublicNavigation**: Customer site navigation
 
-### Components
+### Feature Components
 
-- **Cards**: `.card`, `.card-header`, `.card-body`
-- **Buttons**: `.btn-primary`, `.btn-secondary`, `.btn-outline`, etc.
-- **Forms**: `.form-input`, `.form-select`, `.form-label`
-- **Badges**: `.badge-success`, `.badge-warning`, `.badge-danger`
-- **Navigation**: `.nav-link`, `.router-link-active`
+- **ProductGrid**: Product catalog display
+- **ProductsTable**: Admin product management table
+- **OrdersTable**: Order management and tracking
+- **DashboardCharts**: Analytics and revenue charts
+- **CheckoutForm**: Complete checkout process
+- **ShoppingCartSidebar**: Shopping cart management
+
+### UI Elements
+
+- **SkeletonCard**: Loading placeholders
+- **Toast**: Notification system
+- **Modal**: Product details and confirmations
 
 ## 🔌 API Integration
 
-### Base Configuration
+The frontend communicates with the backend API through:
+
+### Products API
+
+- Get product catalog with search and filters
+- Product CRUD operations (admin)
+- Image upload functionality
+
+### Orders API
+
+- Order creation and management
+- Status tracking and updates
+- Analytics and reporting
+
+### Services Layer
 
 ```javascript
+// Example API service usage
+import { productService } from '@/services/api'
 
-// Product Endpoints
-- GET    /products          # List products with filtering
-- POST   /products          # Create product
-- GET    /products/:id      # Get product details
-- PUT    /products/:id      # Update product
-- PATCH  /products/:id/inventory # Update inventory
-- DELETE /products/:id      # Delete product
-- GET    /products/low-stock # Get low stock products
-
-// Order Endpoints
-- GET    /orders           # List orders with filtering
-- POST   /orders           # Create order
-- GET    /orders/:id       # Get order details
-- PATCH  /orders/:id/status # Update order status
-- GET    /orders/analytics/revenue # Revenue analytics
+// Get products with filters
+const products = await productService.getProducts({
+  category: 'electronics',
+  search: 'laptop',
+  page: 1,
+  limit: 10,
+})
 ```
 
-### Error Handling
+## 🛒 State Management
 
-- Automatic error interceptors
-- Consistent error formatting
-- Loading states management
-- Toast notifications for user feedback
+Using Pinia for state management:
 
-## 📊 Features Overview
+### Product Store
 
-### Public E-commerce Features
+- Product catalog management
+- Search and filtering state
+- Product form state
 
-- **Landing Page**: Hero section with featured products and company branding
-- **Product Browsing**: Interactive product grid with search and filtering
-- **Product Details**: Modal-based product details with image galleries
-- **Shopping Cart**: Persistent cart with quantity management and checkout
-- **Responsive Design**: Mobile-optimized shopping experience
+### Order Store
 
-### Admin Dashboard Features
+- Order management
+- Status updates
+- Analytics data
 
-- **Dashboard Overview**: Revenue metrics, recent orders, and low stock alerts
-- **Revenue Analysis**: Time-based filtering, category analysis, and trend charts
-- **Inventory Management**: Product listing with advanced filtering and stock management
-- **Product Management**: Complete CRUD operations with image upload
-- **Order Management**: Order tracking, status updates, and customer information
+### Cart Store
 
-## 🚀 Development
+- Shopping cart items
+- Quantity management
+- Checkout state
 
-### Available Scripts
+## 🎨 Styling and Design
 
-```bash
-npm run dev      # Start development server
-npm run build    # Build for production
-npm run preview  # Preview production build
-npm run lint     # Run ESLint
-npm run format   # Format code with Prettier
-```
+### Tailwind CSS Configuration
 
-### Code Style
+- Custom color palette
+- Typography scaling
+- Component utilities
+- Responsive breakpoints
 
-- ESLint configuration for Vue 3
-- Prettier for code formatting
-- Composition API with script setup
-- Component-based architecture with feature organization
+### Design System
 
-### Performance Optimizations
-
-- Lazy loading for routes
-- Component-level code splitting
-- Optimized bundle size
-- Responsive images
-- Efficient state management with Pinia
-
-## 🔧 Configuration
-
-### Tailwind CSS
-
-Custom configuration with:
-
-- Extended color palette for dark theme
-- Custom font family (Inter)
-- Additional utility classes
-- Responsive design utilities
-
-### Vite Configuration
-
-- Vue plugin setup
-- Path aliases (@/ for src/)
-- Development server configuration
-- Build optimizations
-
-## 🌐 Browser Support
-
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
+- Consistent spacing and typography
+- Modern card-based layouts
+- Interactive hover states
+- Loading and error states
 
 ## 📱 Responsive Design
 
+The application is fully responsive with:
+
 - Mobile-first approach
-- Breakpoints: sm (640px), md (768px), lg (1024px), xl (1280px)
-- Collapsible navigation for mobile
-- Responsive data tables
-- Touch-friendly interface
+- Tablet and desktop optimizations
+- Touch-friendly interactions
+- Collapsible navigation
 
-## 🔒 Security
-
-- XSS protection through Vue's template system
-- Input validation and sanitization
-- Secure file upload handling
-- CORS configuration for API communication
-
-## 🚀 Deployment
-
-### Production Build
-
-```bash
-npm run build
-```
+## 🔧 Configuration
 
 ### Environment Variables
 
+| Variable       | Description          | Default                   |
+| -------------- | -------------------- | ------------------------- |
+| `VITE_API_URL` | Backend API base URL | http://localhost:5000/api |
+
+### Tailwind CSS
+
+Custom configuration includes:
+
+- Brand color palette
+- Custom spacing scale
+- Typography settings
+- Component variants
+
+### Vite Configuration
+
+- Vue.js plugin setup
+- Path aliases (@/ for src/)
+- Development server settings
+- Build optimizations
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+1. Connect your GitHub repository to Vercel
+2. Set environment variables in Vercel dashboard
+3. Deploy automatically on push to main branch
+
+### Netlify
+
+1. Build the project: `npm run build`
+2. Deploy the `dist` folder to Netlify
+3. Configure environment variables
+
+### Manual Deployment
+
 ```bash
-VITE_API_URL=https://localhost:5000/api
+# Build for production
+npm run build
+
+# The dist/ folder contains the built application
+# Upload to your preferred hosting service
 ```
 
-### Static Hosting
+### Production Checklist
 
-The built application can be deployed to:
+- [ ] Set correct `VITE_API_URL` for production backend
+- [ ] Configure domain and SSL certificate
+- [ ] Set up error monitoring
+- [ ] Configure CDN for static assets
+- [ ] Test all functionality in production environment
 
-- Netlify
-- Vercel
-- AWS S3 + CloudFront
-- GitHub Pages
-- Any static hosting service
+## 🧪 Development Guidelines
 
-## 🏗️ Architecture Decisions
+### Code Style
 
-### Component Organization
+- Use Vue 3 Composition API
+- Follow Vue.js official style guide
+- Use TypeScript-style JSDoc comments
+- Implement proper error handling
 
-- **Feature-based structure**: Components organized by feature area (dashboard, inventory, etc.)
-- **Layout separation**: Public and admin layouts with shared components
-- **Reusable components**: Modular design for maintainability
+### Component Structure
+
+```vue
+<template>
+  <!-- Component template -->
+</template>
+
+<script setup>
+// Composition API setup
+</script>
+
+<style scoped>
+/* Component-specific styles */
+</style>
+```
 
 ### State Management
 
-- **Pinia stores**: Separate stores for products, orders, and application state
-- **Composables**: Shared logic extracted into reusable composables
-- **Local state**: Component-level state for UI-specific data
+- Use Pinia stores for global state
+- Keep component state local when possible
+- Implement proper error handling in stores
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **API Connection Error**
+
+   - Check if backend server is running
+   - Verify `VITE_API_URL` in .env file
+   - Check browser console for CORS errors
+
+2. **Build Errors**
+
+   - Clear node_modules and reinstall: `rm -rf node_modules && npm install`
+   - Check for TypeScript errors in IDE
+   - Verify all imports are correct
+
+3. **Styling Issues**
+   - Ensure Tailwind CSS is properly configured
+   - Check for conflicting CSS classes
+   - Verify responsive breakpoints
+
+### Development Tools
+
+- Vue DevTools browser extension
+- Vite DevTools for performance monitoring
+- Browser developer tools for debugging
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Follow the component organization patterns
-4. Add proper TypeScript-style prop definitions
-5. Run tests and linting
-6. Submit a pull request
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Follow the coding standards and guidelines
+4. Add tests for new functionality
+5. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+6. Push to the branch (`git push origin feature/AmazingFeature`)
+7. Open a Pull Request
 
-## 📄 License
+### Development Standards
 
-This project is licensed under the MIT License.
+- Write descriptive commit messages
+- Add JSDoc comments for complex functions
+- Ensure responsive design compatibility
+- Test on multiple browsers
 
-## 🆘 Support
+## 📝 License
 
-For support and questions:
+This project is licensed under the ISC License.
 
-- Check the documentation
-- Review the API endpoints
-- Ensure backend is running on port 5000
-- Check browser console for errors
+## 📞 Support
 
----
+For support, email your-email@example.com or create an issue in the repository.
 
-Built with ❤️ using Vue.js and modern web technologies.
+## 🔗 Related Links
+
+- [Vue.js Documentation](https://vuejs.org/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/)
+- [Vite Documentation](https://vitejs.dev/)
+- [Pinia Documentation](https://pinia.vuejs.org/)
+- [Backend API Documentation](../backend/README.md)
