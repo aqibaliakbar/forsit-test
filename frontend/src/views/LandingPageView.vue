@@ -6,7 +6,6 @@ import HeroSection from '@/components/landing-page/HeroSection.vue'
 import ProductGrid from '@/components/landing-page/ProductGrid.vue'
 import ProductDetailsModal from '@/components/landing-page/ProductDetailsModal.vue'
 import { useToast } from '@/composables/useToast'
-import { SkeletonCard } from '@/components/skeleton'
 
 const productsStore = useProductsStore()
 const layoutRef = ref(null)

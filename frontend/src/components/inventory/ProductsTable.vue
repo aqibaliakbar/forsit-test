@@ -54,19 +54,19 @@ const editProductFromPreview = () => {
 
 const getStockColorClass = (product) => {
   if (product.stock === 0) return 'text-red-400'
-  if (product.stock <= product.lowStockThreshold) return 'text-amber-400'
+  if (product.stock < product.lowStockThreshold) return 'text-amber-400'
   return 'text-green-400'
 }
 
 const getStockBadgeClass = (product) => {
   if (product.stock === 0) return 'badge-danger'
-  if (product.stock <= product.lowStockThreshold) return 'badge-warning'
+  if (product.stock < product.lowStockThreshold) return 'badge-warning'
   return 'badge-success'
 }
 
 const getStockStatus = (product) => {
   if (product.stock === 0) return 'Out of Stock'
-  if (product.stock <= product.lowStockThreshold) return 'Low Stock'
+  if (product.stock < product.lowStockThreshold) return 'Low Stock'
   return 'In Stock'
 }
 

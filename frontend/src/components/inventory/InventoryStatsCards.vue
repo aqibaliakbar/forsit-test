@@ -71,7 +71,7 @@ defineProps({
         <div>
           <p class="text-sm text-slate-400">In Stock</p>
           <p class="text-2xl font-bold text-green-400">
-            {{ products.filter((p) => p.stock > p.lowStockThreshold).length }}
+            {{ products.filter((p) => p.stock >= p.lowStockThreshold).length }}
           </p>
         </div>
         <div class="p-3 bg-green-900/30 rounded-lg">

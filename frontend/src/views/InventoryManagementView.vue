@@ -44,11 +44,11 @@ const filteredProducts = computed(() => {
   if (filters.value.stockStatus) {
     switch (filters.value.stockStatus) {
       case 'in-stock':
-        filtered = filtered.filter((product) => product.stock > product.lowStockThreshold)
+        filtered = filtered.filter((product) => product.stock >= product.lowStockThreshold)
         break
       case 'low-stock':
         filtered = filtered.filter(
-          (product) => product.stock <= product.lowStockThreshold && product.stock > 0,
+          (product) => product.stock < product.lowStockThreshold && product.stock > 0,
         )
         break
       case 'out-of-stock':
