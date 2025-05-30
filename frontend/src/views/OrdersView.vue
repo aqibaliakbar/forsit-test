@@ -3,12 +3,12 @@ import { ref, computed, onMounted } from 'vue'
 import { useOrdersStore } from '@/stores/orders'
 import OrdersStatsCards from '@/components/orders/OrdersStatsCards.vue'
 import OrdersTable from '@/components/orders/OrdersTable.vue'
-import OrderModals from '@/components/orders/OrderModals.vue'
+import OrderDetailModal from '@/components/orders/OrderDetailModal.vue'
+import EditOrderModal from '@/components/orders/EditOrderModal.vue'
 import { SkeletonStatsCard, SkeletonTable } from '@/components/skeleton'
 
 const ordersStore = useOrdersStore()
 
-// Reactive data
 const searchQuery = ref('')
 const statusFilter = ref('all')
 const dateFilter = ref('all')
@@ -21,7 +21,6 @@ const newPaymentStatus = ref('')
 const currentPage = ref(1)
 const itemsPerPage = ref(10)
 
-// Computed properties
 const loading = computed(() => ordersStore.loading)
 
 const totalPages = computed(() => Math.ceil(filteredOrders.value.length / itemsPerPage.value))
@@ -35,7 +34,6 @@ const paginatedOrders = computed(() => {
 const filteredOrders = computed(() => {
   let orders = ordersStore.orders
 
-  // Apply search filter
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase()
     orders = orders.filter(
@@ -46,12 +44,10 @@ const filteredOrders = computed(() => {
     )
   }
 
-  // Apply status filter
   if (statusFilter.value !== 'all') {
     orders = orders.filter((order) => order.status === statusFilter.value)
   }
 
-  // Apply date filter
   if (dateFilter.value !== 'all') {
     const now = new Date()
     const filterDate = new Date()
@@ -88,7 +84,6 @@ const orderStats = computed(() => {
   }
 })
 
-// Methods
 const viewOrder = (order) => {
   selectedOrder.value = order
   showOrderModal.value = true
@@ -130,7 +125,6 @@ const updateBothStatuses = async () => {
 }
 
 const exportOrders = () => {
-  // Create CSV content
   const headers = [
     'Order ID',
     'Customer',
@@ -171,7 +165,6 @@ const refreshOrders = async () => {
   await ordersStore.fetchOrders()
 }
 
-// Lifecycle
 onMounted(() => {
   refreshOrders()
 })
@@ -179,21 +172,17 @@ onMounted(() => {
 
 <template>
   <div class="space-y-6">
-    <!-- Page Header -->
     <div class="page-header">
       <h1 class="page-title">Orders Management</h1>
       <p class="page-subtitle">Manage and track all customer orders</p>
     </div>
 
-    <!-- Skeleton Loading for Stats Cards -->
     <div v-if="loading" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
       <SkeletonStatsCard v-for="i in 7" :key="i" :show-subtitle="i === 7" />
     </div>
 
-    <!-- Actual Stats Cards -->
     <OrdersStatsCards v-else :order-stats="orderStats" />
 
-    <!-- Skeleton Loading for Table -->
     <SkeletonTable
       v-if="loading"
       :columns="[
@@ -211,7 +200,6 @@ onMounted(() => {
       :show-pagination="true"
     />
 
-    <!-- Actual Table -->
     <OrdersTable
       v-else
       :loading="loading"
@@ -229,12 +217,12 @@ onMounted(() => {
       @edit-order="editOrder"
     />
 
-    <OrderModals
-      v-model:show-order-modal="showOrderModal"
+    <OrderDetailModal v-model:show-order-modal="showOrderModal" :selected-order="selectedOrder" />
+
+    <EditOrderModal
       v-model:show-edit-modal="showEditModal"
       v-model:new-status="newStatus"
       v-model:new-payment-status="newPaymentStatus"
-      :selected-order="selectedOrder"
       :editing-order="editingOrder"
       @update-both-statuses="updateBothStatuses"
     />

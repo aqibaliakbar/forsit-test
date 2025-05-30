@@ -185,7 +185,6 @@ defineExpose({
   showInfo,
 })
 
-// Listen for global toast events
 onMounted(() => {
   window.addEventListener('show-toast', (event) => {
     addToast(event.detail)

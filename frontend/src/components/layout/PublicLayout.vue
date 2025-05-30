@@ -2,7 +2,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useToast } from '@/composables/useToast'
-import Toast from '@/components/other/Toast.vue'
+import Toast from '@/components/toast/Toast.vue'
 import PublicNavigation from './PublicNavigation.vue'
 import PublicFooter from './PublicFooter.vue'
 import ShoppingCartSidebar from './ShoppingCartSidebar.vue'
@@ -10,11 +10,9 @@ import ShoppingCartSidebar from './ShoppingCartSidebar.vue'
 const router = useRouter()
 const { showSuccess, showError, showWarning } = useToast()
 
-// Reactive data
 const showCart = ref(false)
 const cartItems = ref([])
 
-// Computed properties
 const validCartItems = computed(() => {
   return cartItems.value.filter((item) => item && item.product && item.product._id)
 })
@@ -27,7 +25,6 @@ const cartTotal = computed(() => {
   return validCartItems.value.reduce((total, item) => total + item.product.price * item.quantity, 0)
 })
 
-// Methods
 const toggleCart = () => {
   showCart.value = !showCart.value
 }
@@ -56,13 +53,10 @@ const removeFromCart = (productId) => {
 }
 
 const proceedToCheckout = () => {
-  // Save cart to localStorage for persistence
   localStorage.setItem('cart', JSON.stringify(cartItems.value))
   showCart.value = false
 
-  // Navigate to checkout page
   router.push('/checkout').then(() => {
-    // Scroll to top of the page after navigation
     window.scrollTo({ top: 0, behavior: 'smooth' })
   })
 }
@@ -99,13 +93,11 @@ const addToCart = (product, quantity = 1) => {
   showSuccess('Added to Cart', `${product.name} added to your cart`)
 }
 
-// Load cart from localStorage
 onMounted(() => {
   const savedCart = localStorage.getItem('cart')
   if (savedCart) {
     try {
       const parsedCart = JSON.parse(savedCart)
-      // Validate cart items and filter out invalid ones
       const validItems = parsedCart.filter(
         (item) =>
           item &&
@@ -116,7 +108,6 @@ onMounted(() => {
       )
       cartItems.value = validItems
 
-      // If we filtered out invalid items, update localStorage
       if (validItems.length !== parsedCart.length) {
         localStorage.setItem('cart', JSON.stringify(validItems))
       }
@@ -127,7 +118,6 @@ onMounted(() => {
     }
   }
 
-  // Listen for storage events to keep cart in sync
   window.addEventListener('storage', (e) => {
     if (e.key === 'cart') {
       if (e.newValue) {
